@@ -1,0 +1,101 @@
+hr { 
+    height:2px;
+    margin-top: 0em;
+    margin-bottom: 0cm; 
+width: 1275px;
+border-width: 4px;
+
+border-color:orange ;
+}
+
+
+button {
+    background-color: #032858;
+
+  padding-top: 2px;
+
+    color: white;
+    height: 33px;
+    text-align: center;
+
+  
+    cursor: pointer;
+  } 
+
+  
+/* 
+  .cssmarquee {
+   
+    color: white;
+    position: absolute;
+  
+    margin-left: 20px;
+    margin-right: 20px;
+ 
+    text-align: center;
+  
+    
+    animation: cssmarquee 12s linear infinite;
+    }
+    @keyframes cssmarquee {
+    0% {
+    transform: translateX(100%);
+    }
+    100% {
+    transform: translateX(-100%);
+    }
+    }
+
+    :hover {
+        animation-play-state: paused;
+      }
+
+
+      .container-name td {
+        display: inline-block;
+        width: auto;
+        
+      } */
+
+
+      #main { 
+       
+      
+        margin-bottom: 1px;
+        margin: auto;
+        font-weight: bold; 
+
+    } 
+    #left { 
+      margin-left: 2px;
+        float: left; 
+        width: 80px; 
+        height: 10px; 
+     
+    } 
+    #center { 
+      margin-left: 0px;
+      margin-right: 0px;
+        float: left; 
+       width: 1000px;
+        font-weight: 100;
+ 
+    } 
+    #right { 
+     margin-right: 3px;
+      float:left;
+
+        height: 10px; 
+ 
+    }
+
+    #nav{
+    
+      width: 100px; 
+      height: 100px; 
+
+    }
+
+    .dropdown:hover>.dropdown-menu {
+      display: block;
+    }
