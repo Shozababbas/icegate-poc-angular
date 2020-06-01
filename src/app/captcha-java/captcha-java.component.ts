@@ -4,7 +4,10 @@ import { CaptchServiceService, } from "../captch-java/captch-service.service";
 import { Captcha, GenericResponse } from './model/captcha';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CaptchaComponent } from 'angular-captcha';
-
+import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router'
+import { AlertsService } from 'angular-alert-module';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-captcha-java',
   templateUrl: './captcha-java.component.html',
@@ -18,10 +21,15 @@ export class CaptchaJavaComponent implements OnInit {
   form: FormGroup;
   token: String = '';
   captcha: any;
+  flag:boolean=false
 
-  constructor(private fb: FormBuilder, private captchaservice: CaptchServiceService, private sanitizer: DomSanitizer) { }
+  constructor(private _snackBar: MatSnackBar,private alerts: AlertsService,private router:Router ,private fb: FormBuilder, private captchaservice: CaptchServiceService, private sanitizer: DomSanitizer) {
+   
+   }
 
   ngOnInit(): void {
+    this.alerts.setConfig('warn','icon','warning');
+    this.alerts.setMessage('All the fields are required','error');
     this.captchaComponent.captchaEndpoint = 
       'http://localhost:8080/simple-captcha-endpoint';
     this.form = this.fb.group({
@@ -67,19 +75,46 @@ export class CaptchaJavaComponent implements OnInit {
     let captchaId = this.captchaComponent.captchaId;
     const postData = {
       userEnteredCaptchaCode: userEnteredCaptchaCode,
-      captchaId: captchaId
+      captchaId: captchaId,
+      loginId: this.form.get('loginId').value,
+      password: this.form.get('password').value,
     };
     this.captchaservice.validateBotDetectCaptcha(postData)
       .subscribe(
         response => {
           if (response.success == false) {
-            debugger;
+            // debugger;
             console.log(response);
+            this.flag=false;
+            this.openSnackBar()
             this.captchaComponent.reloadImage();
+           
           } else {
-            // TODO: captcha validation succeeded; proceed with the workflow
+            console.log("Success")
+            this.flag=true
+            this.openSnackBar()
           }
         });
   }
-}
 
+  reset()
+  {
+      window.location.reload();
+  }
+
+  openSnackBar() {
+    if(this.flag==true){
+      this._snackBar.open("Registration successful", "", {
+        duration: 4000,
+        panelClass: ['blue-snackbar']
+      });
+      this.reset();
+    }
+    else{
+      this._snackBar.open("captcha does not match", "", {
+        duration: 4000,
+      });
+    }
+    }
+    
+  }

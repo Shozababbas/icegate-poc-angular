@@ -1,13 +1,16 @@
-<br>
-<br>
-<div class="row">
-    <div class="col-md-4 offset-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Registration Form</div>
-            <div class="panel-body">
+<body>
+    <br>
+    <br>
+    <app-alerts></app-alerts>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Registration Form</div>
+                    <div class="panel-body">
 
-                <form [formGroup]="form" (ngSubmit)="validate()" class="form">
-                    <!-- <div class="form-group">
+                        <form [formGroup]="form" (ngSubmit)="validate()" class="form">
+                            <!-- <div class="form-group">
                     <label for="company">Company: </label>
                     <input type="text" class="form-control" formControlName="company" id="company">
                     <span id = "companyError" class="error-message" *ngIf="!form.controls.company.valid && form.controls.company.dirty">Please Enter Company Name</span>
@@ -17,7 +20,6 @@
                     <input type="text" class="form-control" formControlName="first_name" id="first_name">
                     <span id = "first_nameError" class="error-message" *ngIf="!form.controls.first_name.valid && form.controls.first_name.dirty">Please Enter First Name</span>
                 </div>
-
                 <div class="form-group">
                     <label for="last_name">Last Name: </label>
                     <input type="text" class="form-control" formControlName="last_name" id="last_name">
@@ -28,37 +30,72 @@
                     <input type="number" class="form-control" formControlName="contact" id="contact">
                     <span id = "contactError" class="error-message" *ngIf="!form.controls.contact.valid && form.controls.contact.dirty">Please Enter Contact</span>
                 </div> -->
-                    <div class="form-group">
-                        <label for="loginId">Login Id: </label>
-                        <input type="email" class="form-control" formControlName="loginId" id="loginId">
-                        <span id="emailError" class="error-message"
-                            *ngIf="!form.controls.loginId.valid && form.controls.loginId.dirty">Please Enter Login
-                            Id</span>
+                            <BR>
+                            <div class="form-group">
+                                <label for="loginId">Login Id: </label>
+                                <input type="email" class="form-control" formControlName="loginId" id="loginId">
+                                <span id="emailError" class="error-message"
+                                    *ngIf="!form.controls.loginId.valid && form.controls.loginId.dirty">Please Enter
+                                    Login
+                                    Id</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password: </label>
+                                <input type="password" class="form-control" formControlName="password" id="password">
+                                <span id="passwordError" class="error-message"
+                                    *ngIf="!form.controls.password.valid && form.controls.password.dirty">Please Enter
+                                    Password</span>
+                            </div>
+                            <div [ngClass]="captcha" class="form-group">
+                                <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LcHlfUUAAAAAKDKPp6MIXijzwmKrbya-HhoowR5"></re-captcha> -->
+                                <!-- <img [src]="captcha" />
+                        <div class="form-group">
+                            <input type="captchaResponse" class="form-control" formControlName="captchaResponse" id="captchaResponse">
+                            <span id = "captchaResponseError" class="error-message" *ngIf="!form.controls.captchaResponse.valid && form.controls.captchaResponse.dirty">Please Enter Captcha</span>
+                        </div> -->
+                                <botdetect-captcha captchaStyleName="botDetectCaptcha"></botdetect-captcha>
+                            </div>
+                            <div class="form-group">
+                                <label>Captcha:</label>
+                                <input class="form-control" id="userEnteredCaptcha" name="userEnteredCaptcha"
+                                    formControlName="captchaResponse" type="text">
+                                <span id="captchaResponseError" class="error-message"
+                                    *ngIf="!form.controls.captchaResponse.valid && form.controls.captchaResponse.dirty">Please
+                                    Enter the above captcha
+                                </span>
+                            </div>
+                            <!-- <mat-form-field>
+                         
+                            <input matInput value="Captcha Matched Details Added" #message hidden="true">
+                          </mat-form-field>
+                          
+                          <mat-form-field>
+                     
+                            <input matInput value="You're Not a Bot" #action hidden="true">
+                          </mat-form-field> -->
+                            <div class="form-inline">
+
+                                <div class="form-group"> <button class="btn btn-primary" type="submit"
+                                        [disabled]="!form.valid">Submit</button></div>
+
+
+                                <!-- <button class="btn btn-primary"  type="submit"
+                            [disabled]="!form.valid">Submit</button> -->
+
+
+                            <span style="padding-left:163px"></span>
+                                <div class="form-group"><button class="btn btn-primary" (click)="reset()">Reset</button>
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password: </label>
-                        <input type="password" class="form-control" formControlName="password" id="password">
-                        <span id="passwordError" class="error-message"
-                            *ngIf="!form.controls.password.valid && form.controls.password.dirty">Please Enter
-                            Password</span>
-                    </div>
-                    <div [ngClass]="captcha">
-                        <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LcHlfUUAAAAAKDKPp6MIXijzwmKrbya-HhoowR5"></re-captcha> -->
-                        <!-- <img [src]="captcha" />
-                    <div class="form-group">
-                        <input type="captchaResponse" class="form-control" formControlName="captchaResponse" id="captchaResponse">
-                        <span id = "captchaResponseError" class="error-message" *ngIf="!form.controls.captchaResponse.valid && form.controls.captchaResponse.dirty">Please Enter Captcha</span>
-                    </div> -->
-                        <botdetect-captcha captchaStyleName="botDetectCaptcha"></botdetect-captcha>
-                        <input id="userEnteredCaptcha" name="userEnteredCaptcha" formControlName="captchaResponse"
-                            type="text">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" style=" margin-left: 150px;" type="submit"
-                            [disabled]="!form.valid">Submit</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+</body>
